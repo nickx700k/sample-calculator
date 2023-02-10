@@ -5,7 +5,19 @@ export default function Home() {
   const [result, setResult] = useState("");
 
   const handleClick = (e) => {
-    setResult(result.concat(e.target.name));
+    if (
+      result.slice(0, result.length).includes(["."]) &&
+      e.target.name === "."
+    ) {
+      setResult(result);
+    } else if (
+      result.slice(0, result.length).includes(["."]) &&
+      e.target.name != "."
+    ) {
+      setResult(result.concat(e.target.name));
+    } else {
+      setResult(result.concat(e.target.name));
+    }
   };
 
   const handleClear = () => {
@@ -27,9 +39,7 @@ export default function Home() {
   return (
     <div className="Home">
       <div className="Calculator">
-        <form>
-          <input type="text" className="Calculator--input" value={result} />
-        </form>
+        <input type="text" className="Calculator--input" value={result} />
         <div className="Calculator--keypad">
           <button
             className="Calculator--clear"
