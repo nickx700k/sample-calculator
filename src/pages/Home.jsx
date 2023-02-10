@@ -5,19 +5,14 @@ export default function Home() {
   const [result, setResult] = useState("");
 
   const handleClick = (e) => {
-    if (
-      result.slice(0, result.length).includes(["."]) &&
-      e.target.name === "."
-    ) {
-      setResult(result);
-    } else if (
-      result.slice(0, result.length).includes(["."]) &&
-      e.target.name != "."
-    ) {
-      setResult(result.concat(e.target.name));
-    } else {
-      setResult(result.concat(e.target.name));
+    const dot = e.target.name === ".";
+    if (result?.length === 0 && dot) {
+      return setResult("0.");
     }
+    if (dot && result?.includes(".")) {
+      return;
+    }
+    setResult(result.concat(e.target.name));
   };
 
   const handleClear = () => {
